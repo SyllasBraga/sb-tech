@@ -56,7 +56,7 @@ id_account_status INT NOT NULL
 );
 
 CREATE TABLE hardware_type(
-id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+id INT PRIMARY KEY AUTO_INCREMENT,
 details VARCHAR(255) NOT NULL
 );
 
@@ -80,3 +80,8 @@ FOREIGN KEY (id_hardware_type) REFERENCES hardware_type(id);
 
 ALTER TABLE technician ADD CONSTRAINT fk_account_status_technician 
 FOREIGN KEY (id_account_status) REFERENCES account_status(id);
+
+INSERT INTO account_status(status) VALUES('active'), ('inactive');
+INSERT INTO payment_status(status) VALUES('paid'), ('pendent');
+INSERT INTO hardware_type (details) VALUES ('CPU'),('RAM'),('GPU'),('HDD'),('SSD'),('Motherboard'),
+('Power Supply'),('Monitor'),('Keyboard'),('Mouse');
