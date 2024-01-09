@@ -16,5 +16,5 @@ public class RepairModel {
     private Timestamp outDate;
     private ClientModel idClient;
     private TechnicianModel idTechnician;
-    private int paymentStatus;
+    private String paymentStatus;
 }
