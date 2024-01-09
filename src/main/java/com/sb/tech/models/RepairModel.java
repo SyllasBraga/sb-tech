@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RepairModel {
-    private String id;
+    private Long id;
     private Timestamp entryDate;
     private Timestamp repairTimeStipulated;
     private Timestamp outDate;
