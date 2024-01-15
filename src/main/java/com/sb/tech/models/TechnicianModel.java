@@ -22,4 +22,17 @@ public class TechnicianModel {
     private Timestamp admissionDate;
     private Timestamp firedDate;
     private String accountStatus;
+
+    public void update(TechnicianModel newTechnician) {
+        this.id = newTechnician.getId();
+        this.document = newTechnician.getDocument();
+        this.passwordLogin = newTechnician.getPasswordLogin();
+        this.salary = newTechnician.getSalary();
+        this.phone = newTechnician.getPhone();
+        this.email = newTechnician.getEmail();
+        this.birthDate = newTechnician.getBirthDate();
+        this.admissionDate = newTechnician.getAdmissionDate();
+        this.firedDate = newTechnician.getFiredDate();
+        this.accountStatus = newTechnician.getAccountStatus();
+    }
 }

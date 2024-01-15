@@ -8,4 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface TechnicianRepository extends JpaRepository<TechnicianModel, UUID> {
+    TechnicianModel findByDocument(String document);
 }
