@@ -1,5 +1,7 @@
 package com.sb.tech.dtos;
 
+import com.sb.tech.models.TechnicianModel;
+
 import java.math.BigDecimal;
 import java.sql.Timestamp;
 import java.util.UUID;
@@ -16,4 +18,12 @@ public record TechnicianDto(
     Timestamp firedDate,
     String accountStatus
 ) {
+    public TechnicianDto {
+    }
+
+    public static TechnicianDto toTechnicianDto(TechnicianModel technicianModel) {
+        return new TechnicianDto(technicianModel.getId(), technicianModel.getDocument(), technicianModel.getPasswordLogin(),
+                technicianModel.getSalary(), technicianModel.getPhone(), technicianModel.getEmail(), technicianModel.getBirthDate(),
+                technicianModel.getAdmissionDate(), technicianModel.getFiredDate(), technicianModel.getAccountStatus());
+    }
 }
