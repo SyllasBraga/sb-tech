@@ -19,7 +19,11 @@ public class RepairModel {
     private Timestamp entryDate;
     private Timestamp repairTimeStipulated;
     private Timestamp outDate;
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
     private ClientModel idClient;
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
     private TechnicianModel idTechnician;
     private String paymentStatus;
 }

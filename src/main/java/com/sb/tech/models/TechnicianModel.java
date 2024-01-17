@@ -19,13 +19,18 @@ public class TechnicianModel {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
     private String document;
+    @Column(name = "password_login")
     private String passwordLogin;
     private BigDecimal salary;
     private String phone;
     private String email;
+    @Column(name = "birth_date")
     private Timestamp birthDate;
+    @Column(name = "admission_date")
     private Timestamp admissionDate;
+    @Column(name = "fired_date")
     private Timestamp firedDate;
+    @Column(name = "id_account_status")
     private String accountStatus;
 
     public void update(TechnicianModel newTechnician) {

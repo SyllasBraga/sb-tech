@@ -18,5 +18,7 @@ public class BudgetModel {
     private Long id;
     private BigDecimal repairValue;
     private String details;
+    @ManyToOne
+    @JoinColumn(referencedColumnName = "id")
     private HardwareTypeModel hardwareType;
 }
