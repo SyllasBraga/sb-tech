@@ -37,11 +37,6 @@ id INT PRIMARY KEY AUTO_INCREMENT,
 status VARCHAR(30) NOT NULL
 );
 
-CREATE TABLE account_status(
-id INT PRIMARY KEY AUTO_INCREMENT,
-status VARCHAR(30) NOT NULL
-);
-
 CREATE TABLE technician(
 id VARCHAR(36) PRIMARY KEY NOT NULL,
 document VARCHAR(11) NOT NULL UNIQUE,
@@ -53,7 +48,7 @@ email VARCHAR(255) NOT NULL,
 birth_date TIMESTAMP NOT NULL,
 admission_date TIMESTAMP NOT NULL,
 fired_date TIMESTAMP,
-id_account_status INT NOT NULL 
+id_account_status VARCHAR(255) NOT NULL 
 );
 
 CREATE TABLE hardware_type(
@@ -79,10 +74,6 @@ FOREIGN KEY (id_budget) REFERENCES budget(id);
 ALTER TABLE budget ADD CONSTRAINT fk_hardware_type_budget 
 FOREIGN KEY (id_hardware_type) REFERENCES hardware_type(id);
 
-ALTER TABLE technician ADD CONSTRAINT fk_account_status_technician 
-FOREIGN KEY (id_account_status) REFERENCES account_status(id);
-
-INSERT INTO account_status(status) VALUES('active'), ('inactive');
 INSERT INTO payment_status(status) VALUES('paid'), ('pendent');
 INSERT INTO hardware_type (details) VALUES ('CPU'),('RAM'),('GPU'),('HDD'),('SSD'),('Motherboard'),
 ('Power Supply'),('Monitor'),('Keyboard'),('Mouse');
