@@ -10,6 +10,7 @@ public record TechnicianDto(
     UUID id,
     String document,
     String passwordLogin,
+    String name,
     BigDecimal salary,
     String phone,
     String email,
@@ -23,7 +24,8 @@ public record TechnicianDto(
 
     public static TechnicianDto toTechnicianDto(TechnicianModel technicianModel) {
         return new TechnicianDto(technicianModel.getId(), technicianModel.getDocument(), technicianModel.getPasswordLogin(),
-                technicianModel.getSalary(), technicianModel.getPhone(), technicianModel.getEmail(), technicianModel.getBirthDate(),
-                technicianModel.getAdmissionDate(), technicianModel.getFiredDate(), technicianModel.getAccountStatus());
+                technicianModel.getName(), technicianModel.getSalary(), technicianModel.getPhone(), technicianModel.getEmail(),
+                technicianModel.getBirthDate(), technicianModel.getAdmissionDate(), technicianModel.getFiredDate(),
+                technicianModel.getAccountStatus());
     }
 }

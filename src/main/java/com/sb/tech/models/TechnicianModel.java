@@ -25,6 +25,7 @@ public class TechnicianModel {
     private String document;
     @Column(name = "password_login")
     private String passwordLogin;
+    private String name;
     private BigDecimal salary;
     private String phone;
     private String email;
@@ -40,6 +41,7 @@ public class TechnicianModel {
     public void update(TechnicianModel newTechnician) {
         this.id = newTechnician.getId();
         this.document = newTechnician.getDocument();
+        this.name = newTechnician.getName();
         this.passwordLogin = newTechnician.getPasswordLogin();
         this.salary = newTechnician.getSalary();
         this.phone = newTechnician.getPhone();
@@ -52,7 +54,8 @@ public class TechnicianModel {
 
     public static TechnicianModel toTechnicianModel(TechnicianDto technicianDto) {
         return new TechnicianModel(technicianDto.id(), technicianDto.document(), technicianDto.passwordLogin(),
-                technicianDto.salary(), technicianDto.phone(), technicianDto.email(), technicianDto.birthDate(),
-                technicianDto.admissionDate(), technicianDto.firedDate(), technicianDto.accountStatus());
+                technicianDto.name(), technicianDto.salary(), technicianDto.phone(), technicianDto.email(),
+                technicianDto.birthDate(), technicianDto.admissionDate(), technicianDto.firedDate(),
+                technicianDto.accountStatus());
     }
 }
