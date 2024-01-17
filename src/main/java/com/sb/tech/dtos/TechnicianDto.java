@@ -1,6 +1,7 @@
 package com.sb.tech.dtos;
 
 import com.sb.tech.models.TechnicianModel;
+import com.sb.tech.models.enums.AccountStatusEnum;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -17,7 +18,7 @@ public record TechnicianDto(
     Timestamp birthDate,
     Timestamp admissionDate,
     Timestamp firedDate,
-    String accountStatus
+    AccountStatusEnum accountStatus
 ) {
     public TechnicianDto {
     }

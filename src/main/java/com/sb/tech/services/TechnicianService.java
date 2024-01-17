@@ -3,6 +3,7 @@ package com.sb.tech.services;
 import com.sb.tech.exceptions.NotFoundException;
 import com.sb.tech.exceptions.UuidParseException;
 import com.sb.tech.models.TechnicianModel;
+import com.sb.tech.models.enums.AccountStatusEnum;
 import com.sb.tech.repositories.TechnicianRepository;
 import org.springframework.stereotype.Service;
 
@@ -31,13 +32,14 @@ public class TechnicianService {
 
     public TechnicianModel insertTechnician(TechnicianModel technicianModel){
         technicianModel.setId(UUID.randomUUID());
-        technicianModel.setAccountStatus("1");
+        technicianModel.setAccountStatus(AccountStatusEnum.ACTIVE);
         return technicianRepository.save(technicianModel);
     }
 
     public TechnicianModel updateTechnician(String id, TechnicianModel newTechnician){
         try {
             newTechnician.setId(UUID.fromString(id));
+            newTechnician.setAccountStatus(AccountStatusEnum.ACTIVE);
             TechnicianModel actualTechnician = technicianRepository.findById(newTechnician.getId())
                     .orElseThrow(() -> new NotFoundException("Technician not found"));
             actualTechnician.update(newTechnician);

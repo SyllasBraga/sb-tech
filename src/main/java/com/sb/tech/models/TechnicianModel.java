@@ -1,10 +1,12 @@
 package com.sb.tech.models;
 
 import com.sb.tech.dtos.TechnicianDto;
+import com.sb.tech.models.enums.AccountStatusEnum;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Formula;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
@@ -36,7 +38,8 @@ public class TechnicianModel {
     @Column(name = "fired_date")
     private Timestamp firedDate;
     @Column(name = "id_account_status")
-    private String accountStatus;
+    @Enumerated(EnumType.STRING)
+    private AccountStatusEnum accountStatus;
 
     public void update(TechnicianModel newTechnician) {
         this.id = newTechnician.getId();
