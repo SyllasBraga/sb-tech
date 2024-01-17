@@ -1,6 +1,7 @@
 package com.sb.tech.controllers;
 
 import com.sb.tech.dtos.TechnicianDto;
+import com.sb.tech.models.TechnicianModel;
 import com.sb.tech.services.TechnicianService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,5 +24,11 @@ public class TechnicianController {
     @GetMapping("/document")
     public ResponseEntity<TechnicianDto> getByDocument(@RequestParam String document){
         return ResponseEntity.ok(TechnicianDto.toTechnicianDto(technicianService.getTechnicianByDocument(document)));
+    }
+
+    @PostMapping
+    public ResponseEntity<TechnicianDto> insert(@RequestBody TechnicianDto technicianDto){
+        TechnicianModel technicianSaved = TechnicianModel.toTechnicianModel(technicianDto);
+        return ResponseEntity.ok(TechnicianDto.toTechnicianDto(technicianService.insertTechnician(technicianSaved)));
     }
 }

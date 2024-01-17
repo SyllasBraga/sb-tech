@@ -31,6 +31,7 @@ public class TechnicianService {
 
     public TechnicianModel insertTechnician(TechnicianModel technicianModel){
         technicianModel.setId(UUID.randomUUID());
+        technicianModel.setAccountStatus("1");
         return technicianRepository.save(technicianModel);
     }
 

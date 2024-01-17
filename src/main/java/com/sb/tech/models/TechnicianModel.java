@@ -1,9 +1,12 @@
 package com.sb.tech.models;
 
+import com.sb.tech.dtos.TechnicianDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.type.SqlTypes;
 
 import java.math.BigDecimal;
 import java.sql.Timestamp;
@@ -17,6 +20,7 @@ import java.util.UUID;
 public class TechnicianModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @JdbcTypeCode(SqlTypes.VARCHAR)
     private UUID id;
     private String document;
     @Column(name = "password_login")
@@ -44,5 +48,11 @@ public class TechnicianModel {
         this.admissionDate = newTechnician.getAdmissionDate();
         this.firedDate = newTechnician.getFiredDate();
         this.accountStatus = newTechnician.getAccountStatus();
+    }
+
+    public static TechnicianModel toTechnicianModel(TechnicianDto technicianDto) {
+        return new TechnicianModel(technicianDto.id(), technicianDto.document(), technicianDto.passwordLogin(),
+                technicianDto.salary(), technicianDto.phone(), technicianDto.email(), technicianDto.birthDate(),
+                technicianDto.admissionDate(), technicianDto.firedDate(), technicianDto.accountStatus());
     }
 }
