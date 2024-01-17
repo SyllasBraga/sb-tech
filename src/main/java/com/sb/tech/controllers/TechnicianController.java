@@ -6,6 +6,8 @@ import com.sb.tech.services.TechnicianService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @RestController
 @RequestMapping("api/v1/technician")
 public class TechnicianController {
@@ -21,7 +23,7 @@ public class TechnicianController {
         return ResponseEntity.ok(TechnicianDto.toTechnicianDto(technicianService.getByUuid(id)));
     }
 
-    @GetMapping("/document")
+    @GetMapping("")
     public ResponseEntity<TechnicianDto> getByDocument(@RequestParam String document){
         return ResponseEntity.ok(TechnicianDto.toTechnicianDto(technicianService.getTechnicianByDocument(document)));
     }
@@ -31,4 +33,11 @@ public class TechnicianController {
         TechnicianModel technicianSaved = TechnicianModel.toTechnicianModel(technicianDto);
         return ResponseEntity.ok(TechnicianDto.toTechnicianDto(technicianService.insertTechnician(technicianSaved)));
     }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<TechnicianDto> update(@PathVariable String id,  @RequestBody TechnicianDto technicianDto){
+        TechnicianModel technicianSaved = TechnicianModel.toTechnicianModel(technicianDto);
+        return ResponseEntity.ok(TechnicianDto.toTechnicianDto(technicianService.updateTechnician(id, technicianSaved)));
+    }
+
 }

@@ -35,11 +35,16 @@ public class TechnicianService {
         return technicianRepository.save(technicianModel);
     }
 
-    public TechnicianModel updateTechnician(TechnicianModel newTechnician){
-        TechnicianModel actualTechnician = technicianRepository.findById(newTechnician.getId())
-                .orElseThrow(() -> new NotFoundException("Technician not found"));
-        actualTechnician.update(newTechnician);
-        return technicianRepository.save(actualTechnician);
+    public TechnicianModel updateTechnician(String id, TechnicianModel newTechnician){
+        try {
+            newTechnician.setId(UUID.fromString(id));
+            TechnicianModel actualTechnician = technicianRepository.findById(newTechnician.getId())
+                    .orElseThrow(() -> new NotFoundException("Technician not found"));
+            actualTechnician.update(newTechnician);
+            return technicianRepository.save(actualTechnician);
+        }catch (IllegalArgumentException ex){
+            throw new UuidParseException("Exception Parse UUID: Invalid UUID");
+        }
     }
 
     public void deleteTechnician(String uuid) {
