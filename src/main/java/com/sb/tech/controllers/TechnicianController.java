@@ -40,4 +40,9 @@ public class TechnicianController {
         return ResponseEntity.ok(TechnicianDto.toTechnicianDto(technicianService.updateTechnician(id, technicianSaved)));
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<TechnicianDto> delete(@PathVariable String id){
+        technicianService.deleteTechnician(id);
+        return ResponseEntity.noContent().build();
+    }
 }
