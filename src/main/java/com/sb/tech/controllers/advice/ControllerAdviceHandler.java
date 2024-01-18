@@ -2,6 +2,7 @@ package com.sb.tech.controllers.advice;
 
 import com.sb.tech.exceptions.NotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -46,6 +47,14 @@ public class ControllerAdviceHandler {
                                                                         HttpServletRequest http){
         StandardError error = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(),
                 "Bad Request", e.getMessage(), http.getRequestURI());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException e,
+                                                                         HttpServletRequest http){
+        StandardError error = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(),
+                "Bad Request", e.getMessage().substring(0, 47), http.getRequestURI());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 }
