@@ -1,5 +1,6 @@
 package com.sb.tech.controllers.advice;
 
+import com.sb.tech.exceptions.NotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,13 @@ import java.time.Instant;
 
 @ControllerAdvice
 public class ControllerAdviceHandler {
+
+    @ExceptionHandler(NotFoundException.class)
+    public ResponseEntity<StandardError> notFounException(NotFoundException e, HttpServletRequest http){
+        StandardError error = new StandardError(Instant.now(), HttpStatus.NOT_FOUND.value(),
+                "Not Found", e.getMessage(), http.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ValidationError> validationException(MethodArgumentNotValidException e, HttpServletRequest http){
