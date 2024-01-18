@@ -56,9 +56,9 @@ public class TechnicianModel {
     }
 
     public static TechnicianModel toTechnicianModel(TechnicianDto technicianDto) {
-        return new TechnicianModel(technicianDto.id(), technicianDto.document(), technicianDto.passwordLogin(),
-                technicianDto.name(), technicianDto.salary(), technicianDto.phone(), technicianDto.email(),
-                technicianDto.birthDate(), technicianDto.admissionDate(), technicianDto.firedDate(),
-                technicianDto.accountStatus());
+        return new TechnicianModel(technicianDto.getId(), technicianDto.getDocument(), technicianDto.getPasswordLogin(),
+                technicianDto.getName(), technicianDto.getSalary(), technicianDto.getPhone(), technicianDto.getEmail(),
+                technicianDto.getBirthDate(), technicianDto.getAdmissionDate(), technicianDto.getFiredDate(),
+                technicianDto.getAccountStatus());
     }
 }

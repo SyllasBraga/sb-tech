@@ -1,11 +1,17 @@
 package com.sb.tech.dtos;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 
-public record BudgetDto(
-    Long id,
-    BigDecimal repairValue,
-    String details,
-    HardwareTypeDto hardwareType
-) {
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class BudgetDto{
+    private Long id;
+    private BigDecimal repairValue;
+    private String details;
+    private HardwareTypeDto hardwareType;
 }

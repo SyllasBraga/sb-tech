@@ -1,12 +1,18 @@
 package com.sb.tech.dtos;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 import java.util.UUID;
 
-public record ClientDto(
-    UUID id,
-    String document,
-    String name,
-    String phone,
-    String email
-) {
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+public class ClientDto{
+    private UUID id;
+    private String document;
+    private String name;
+    private String phone;
+    private String email;
 }

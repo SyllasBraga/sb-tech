@@ -2,16 +2,21 @@ package com.sb.tech.dtos;
 
 import com.sb.tech.models.ClientModel;
 import com.sb.tech.models.TechnicianModel;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 
-public record RepairDto(
-    Long id,
-    Timestamp entryDate,
-    Timestamp repairTimeStipulated,
-    Timestamp outDate,
-    ClientDto client,
-    TechnicianDto technician,
-    String paymentStatus
-) {
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
+public class RepairDto {
+    private Long id;
+    private Timestamp entryDate;
+    private Timestamp repairTimeStipulated;
+    private Timestamp outDate;
+    private ClientDto client;
+    private TechnicianDto technician;
+    private String paymentStatus;
 }

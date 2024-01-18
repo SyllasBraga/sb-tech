@@ -3,10 +3,11 @@ package com.sb.tech.controllers;
 import com.sb.tech.dtos.TechnicianDto;
 import com.sb.tech.models.TechnicianModel;
 import com.sb.tech.services.TechnicianService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.UUID;
 
 @RestController
 @RequestMapping("api/v1/technician")
@@ -29,13 +30,13 @@ public class TechnicianController {
     }
 
     @PostMapping
-    public ResponseEntity<TechnicianDto> insert(@RequestBody TechnicianDto technicianDto){
+    public ResponseEntity<TechnicianDto> insert(@RequestBody @Valid  TechnicianDto technicianDto){
         TechnicianModel technicianSaved = TechnicianModel.toTechnicianModel(technicianDto);
-        return ResponseEntity.ok(TechnicianDto.toTechnicianDto(technicianService.insertTechnician(technicianSaved)));
+        return ResponseEntity.status(HttpStatus.CREATED).body(TechnicianDto.toTechnicianDto(technicianService.insertTechnician(technicianSaved)));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<TechnicianDto> update(@PathVariable String id,  @RequestBody TechnicianDto technicianDto){
+    public ResponseEntity<TechnicianDto> update(@PathVariable String id, @Valid @RequestBody TechnicianDto technicianDto){
         TechnicianModel technicianSaved = TechnicianModel.toTechnicianModel(technicianDto);
         return ResponseEntity.ok(TechnicianDto.toTechnicianDto(technicianService.updateTechnician(id, technicianSaved)));
     }
