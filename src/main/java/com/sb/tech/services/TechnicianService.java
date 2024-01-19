@@ -5,6 +5,7 @@ import com.sb.tech.exceptions.UuidParseException;
 import com.sb.tech.models.TechnicianModel;
 import com.sb.tech.models.enums.AccountStatusEnum;
 import com.sb.tech.repositories.TechnicianRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.UUID;
@@ -12,9 +13,11 @@ import java.util.UUID;
 @Service
 public class TechnicianService {
     public final TechnicianRepository technicianRepository;
+    private final BCryptPasswordEncoder passwordEncoder;
 
-    public TechnicianService(TechnicianRepository technicianRepository) {
+    public TechnicianService(TechnicianRepository technicianRepository, BCryptPasswordEncoder passwordEncoder) {
         this.technicianRepository = technicianRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public TechnicianModel getByUuid(String uuid){
@@ -32,6 +35,7 @@ public class TechnicianService {
 
     public TechnicianModel insertTechnician(TechnicianModel technicianModel){
         technicianModel.setId(UUID.randomUUID());
+        technicianModel.setPasswordLogin(passwordEncoder.encode(technicianModel.getPasswordLogin()));
         technicianModel.setAccountStatus(AccountStatusEnum.ACTIVE);
         return technicianRepository.save(technicianModel);
     }
