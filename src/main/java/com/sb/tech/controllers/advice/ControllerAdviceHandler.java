@@ -54,7 +54,7 @@ public class ControllerAdviceHandler {
     public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException e,
                                                                          HttpServletRequest http){
         StandardError error = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(),
-                "Bad Request", e.getMessage().substring(0, 47), http.getRequestURI());
+                "Bad Request", e.getMessage(), http.getRequestURI());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 }
