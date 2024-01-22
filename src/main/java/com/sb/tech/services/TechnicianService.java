@@ -12,8 +12,10 @@ import java.util.UUID;
 
 @Service
 public class TechnicianService {
-    public final TechnicianRepository technicianRepository;
+    private final TechnicianRepository technicianRepository;
     private final BCryptPasswordEncoder passwordEncoder;
+    private static final String EXCEPTION_UUID_INVALID = "Exception Parse UUID: Invalid UUID";
+    private static final String TECHNICIAN_NOT_FOUND = "Technician not found";
 
     public TechnicianService(TechnicianRepository technicianRepository, BCryptPasswordEncoder passwordEncoder) {
         this.technicianRepository = technicianRepository;
@@ -23,9 +25,9 @@ public class TechnicianService {
     public TechnicianModel getByUuid(String uuid){
         try {
             return technicianRepository.findById(UUID.fromString(uuid))
-                    .orElseThrow(() -> new NotFoundException("Technician not found"));
+                    .orElseThrow(() -> new NotFoundException(TECHNICIAN_NOT_FOUND));
         }catch (IllegalArgumentException ex){
-            throw new UuidParseException("Exception Parse UUID: Invalid UUID");
+            throw new UuidParseException(EXCEPTION_UUID_INVALID);
         }
     }
 
@@ -45,11 +47,11 @@ public class TechnicianService {
             newTechnician.setId(UUID.fromString(id));
             newTechnician.setAccountStatus(AccountStatusEnum.ACTIVE);
             TechnicianModel actualTechnician = technicianRepository.findById(newTechnician.getId())
-                    .orElseThrow(() -> new NotFoundException("Technician not found"));
+                    .orElseThrow(() -> new NotFoundException(TECHNICIAN_NOT_FOUND));
             actualTechnician.update(newTechnician);
             return technicianRepository.save(actualTechnician);
         }catch (IllegalArgumentException ex){
-            throw new UuidParseException("Exception Parse UUID: Invalid UUID");
+            throw new UuidParseException(EXCEPTION_UUID_INVALID);
         }
     }
 
@@ -57,7 +59,7 @@ public class TechnicianService {
         try {
             technicianRepository.deleteById(UUID.fromString(uuid));
         } catch (IllegalArgumentException ex) {
-            throw new UuidParseException("Exception Parse UUID: Invalid UUID");
+            throw new UuidParseException(EXCEPTION_UUID_INVALID);
         }
     }
 }
