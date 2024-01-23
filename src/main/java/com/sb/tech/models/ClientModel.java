@@ -23,4 +23,12 @@ public class ClientModel {
     private String name;
     private String phone;
     private String email;
+
+    public void update(ClientModel clientModel) {
+        this.id = clientModel.getId();
+        this.document = clientModel.getDocument();
+        this.name = clientModel.getName();
+        this.phone = clientModel.getPhone();
+        this.email = clientModel.getEmail();
+    }
 }
