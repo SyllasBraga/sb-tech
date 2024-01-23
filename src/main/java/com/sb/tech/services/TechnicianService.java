@@ -46,8 +46,7 @@ public class TechnicianService {
         try {
             newTechnician.setId(UUID.fromString(id));
             newTechnician.setAccountStatus(AccountStatusEnum.ACTIVE);
-            TechnicianModel actualTechnician = technicianRepository.findById(newTechnician.getId())
-                    .orElseThrow(() -> new NotFoundException(TECHNICIAN_NOT_FOUND));
+            TechnicianModel actualTechnician = getByUuid(id);
             actualTechnician.update(newTechnician);
             return technicianRepository.save(actualTechnician);
         }catch (IllegalArgumentException ex){
