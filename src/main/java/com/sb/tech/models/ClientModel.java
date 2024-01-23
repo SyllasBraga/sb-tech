@@ -1,5 +1,6 @@
 package com.sb.tech.models;
 
+import com.sb.tech.dtos.ClientDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -23,6 +24,11 @@ public class ClientModel {
     private String name;
     private String phone;
     private String email;
+
+    public static ClientModel toClientModel(ClientDto clientDto) {
+        return new ClientModel(clientDto.getId(), clientDto.getDocument(), clientDto.getName(),
+                clientDto.getPhone(), clientDto.getEmail());
+    }
 
     public void update(ClientModel clientModel) {
         this.id = clientModel.getId();

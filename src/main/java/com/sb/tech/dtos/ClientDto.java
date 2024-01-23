@@ -1,5 +1,6 @@
 package com.sb.tech.dtos;
 
+import com.sb.tech.models.ClientModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -15,4 +16,9 @@ public class ClientDto{
     private String name;
     private String phone;
     private String email;
+
+    public static ClientDto toClientDto(ClientModel clientModel) {
+        return new ClientDto(clientModel.getId(), clientModel.getDocument(), clientModel.getEmail(),
+                clientModel.getEmail(), clientModel.getName());
+    }
 }
