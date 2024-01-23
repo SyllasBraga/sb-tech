@@ -24,6 +24,7 @@
 - ~~Extrair modelo ER do SGDB MySQL;~~
 - Criar as camadas de entidades, acesso ao banco de dados, serviços, controllers, testes, etc;
 - Implementar cacheamento com Redis;
+- Implementar um webhook para cada atualização nos status do reparo
 - Implementar Autenticação e Autorização com JWT;
 - Documentar com Swagger;
 - Adicionar a aplicação em um container docker e subir no dockerhub. 

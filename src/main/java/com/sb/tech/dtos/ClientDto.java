@@ -18,7 +18,7 @@ public class ClientDto{
     private String email;
 
     public static ClientDto toClientDto(ClientModel clientModel) {
-        return new ClientDto(clientModel.getId(), clientModel.getDocument(), clientModel.getEmail(),
-                clientModel.getEmail(), clientModel.getName());
+        return new ClientDto(clientModel.getId(), clientModel.getDocument(), clientModel.getName(),
+                clientModel.getPhone(), clientModel.getEmail());
     }
 }

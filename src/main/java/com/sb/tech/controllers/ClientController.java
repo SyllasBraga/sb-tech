@@ -8,6 +8,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @RestController
 @RequestMapping("api/v1/client")
 public class ClientController {
@@ -18,12 +21,21 @@ public class ClientController {
         this.clientService = clientService;
     }
 
+    @GetMapping("")
+    public ResponseEntity<List<ClientDto>> getAll(){
+        List<ClientDto> listClients = new ArrayList<>();
+        clientService.getAll().forEach(clientModel ->
+            listClients.add(ClientDto.toClientDto(clientModel))
+        );
+        return ResponseEntity.ok(listClients);
+    }
+
     @GetMapping("/{id}")
     public ResponseEntity<ClientDto> getById(@PathVariable String id){
         return ResponseEntity.ok(ClientDto.toClientDto(clientService.getByUuid(id)));
     }
 
-    @GetMapping("")
+    @GetMapping("/document")
     public ResponseEntity<ClientDto> getByDocument(@RequestParam String document){
         return ResponseEntity.ok(ClientDto.toClientDto(clientService.getClientByDocument(document)));
     }
