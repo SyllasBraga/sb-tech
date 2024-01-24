@@ -21,4 +21,10 @@ public class BudgetModel {
     @ManyToOne
     @JoinColumn(referencedColumnName = "id")
     private HardwareTypeModel hardwareType;
+
+    public void update(BudgetModel budgetModel) {
+        this.repairValue = budgetModel.getRepairValue();
+        this.details = budgetModel.getDetails();
+        this.hardwareType = budgetModel.getHardwareType();
+    }
 }
