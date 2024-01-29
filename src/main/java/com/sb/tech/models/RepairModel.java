@@ -1,5 +1,6 @@
 package com.sb.tech.models;
 
+import com.sb.tech.dtos.RepairDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -42,5 +43,12 @@ public class RepairModel {
         this.idTechnician = repairModel.getIdTechnician();
         this.paymentStatus = repairModel.getPaymentStatus();
         this.budgetList = repairModel.getBudgetList();
+    }
+
+    public static RepairModel toRepairModel(RepairDto repairDto){
+        return new RepairModel(repairDto.getId(), repairDto.getEntryDate(), repairDto.getRepairTimeStipulated(),
+                repairDto.getOutDate(), ClientModel.toClientModel(repairDto.getClient()),
+                TechnicianModel.toTechnicianModel(repairDto.getTechnician()), repairDto.getPaymentStatus(),
+                BudgetModel.toBudgetModel(repairDto.getListBudget()));
     }
 }

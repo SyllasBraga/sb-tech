@@ -3,9 +3,12 @@ package com.sb.tech.controllers;
 import com.sb.tech.dtos.RepairDto;
 import com.sb.tech.models.RepairModel;
 import com.sb.tech.services.RepairService;
+import jakarta.validation.Valid;
+import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
@@ -27,5 +30,17 @@ public class RepairController {
         List<RepairModel> listModel = repairService.getAll();
         listModel.forEach(repairModel -> listDto.add(RepairDto.toRepairDto(repairModel)));
         return ResponseEntity.ok(listDto);
+    }
+
+    @GetMapping("/client")
+    public ResponseEntity<RepairDto> getByClientDocument(@Valid @RequestParam(name = "document") @CPF String document){
+        RepairDto repairDto = RepairDto.toRepairDto(repairService.getByClientDocument(document));
+        return ResponseEntity.ok(repairDto);
+    }
+
+    @GetMapping("/technician")
+    public ResponseEntity<RepairDto> getByTechnicianUuid(@RequestParam(name = "id") String id){
+        RepairDto repairDto = RepairDto.toRepairDto(repairService.getByTechnicianId(id));
+        return ResponseEntity.ok(repairDto);
     }
 }
