@@ -5,10 +5,12 @@ import com.sb.tech.exceptions.UuidParseException;
 import com.sb.tech.models.BudgetModel;
 import com.sb.tech.models.RepairModel;
 import com.sb.tech.repositories.RepairRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.UUID;
 
+@Service
 public class RepairService {
 
     private static final String EXCEPTION_UUID_INVALID = "Exception Parse UUID: Invalid UUID";
