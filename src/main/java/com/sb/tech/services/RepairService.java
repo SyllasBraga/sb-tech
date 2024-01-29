@@ -2,6 +2,7 @@ package com.sb.tech.services;
 
 import com.sb.tech.exceptions.NotFoundException;
 import com.sb.tech.exceptions.UuidParseException;
+import com.sb.tech.models.BudgetModel;
 import com.sb.tech.models.RepairModel;
 import com.sb.tech.repositories.RepairRepository;
 
@@ -47,5 +48,11 @@ public class RepairService {
 
     public void delete(Long id){
         repository.deleteById(id);
+    }
+
+    public RepairModel addBudget(Long id, BudgetModel budgetModel){
+        RepairModel actualRepair = repository.findById(id).orElseThrow(()-> new NotFoundException("Repair not found"));
+        actualRepair.getBudgetList().add(budgetModel);
+        return repository.save(actualRepair);
     }
 }
