@@ -12,6 +12,7 @@ import java.util.UUID;
 public class RepairService {
 
     private static final String EXCEPTION_UUID_INVALID = "Exception Parse UUID: Invalid UUID";
+    public static final String REPAIR_NOT_FOUND = "Repair not found";
     private final RepairRepository repository;
     private final BudgetService budgetService;
 
@@ -41,7 +42,7 @@ public class RepairService {
     }
 
     public RepairModel update(Long id, RepairModel repairModel){
-        RepairModel actualRepair = repository.findById(id).orElseThrow(()-> new NotFoundException("Repair not found"));
+        RepairModel actualRepair = repository.findById(id).orElseThrow(()-> new NotFoundException(REPAIR_NOT_FOUND));
         actualRepair.update(repairModel);
         return repository.save(actualRepair);
     }
@@ -51,7 +52,7 @@ public class RepairService {
     }
 
     public RepairModel addBudget(Long id, BudgetModel budgetModel){
-        RepairModel actualRepair = repository.findById(id).orElseThrow(()-> new NotFoundException("Repair not found"));
+        RepairModel actualRepair = repository.findById(id).orElseThrow(()-> new NotFoundException(REPAIR_NOT_FOUND));
         actualRepair.getBudgetList().add(budgetModel);
         return repository.save(actualRepair);
     }
