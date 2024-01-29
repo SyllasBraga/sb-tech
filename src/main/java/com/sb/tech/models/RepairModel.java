@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -26,4 +27,20 @@ public class RepairModel {
     @JoinColumn(referencedColumnName = "id")
     private TechnicianModel idTechnician;
     private String paymentStatus;
+    @ManyToMany
+    @JoinTable(name = "repair_budget",
+            joinColumns = @JoinColumn(name = "id_repair"),
+            inverseJoinColumns = @JoinColumn(name = "id_budget"))
+    private List<BudgetModel> budgetList;
+
+    public void update(RepairModel repairModel){
+        this.id = repairModel.getId();
+        this.entryDate = repairModel.getEntryDate();
+        this.repairTimeStipulated = repairModel.getRepairTimeStipulated();
+        this.outDate = repairModel.getOutDate();
+        this.idClient = repairModel.getIdClient();
+        this.idTechnician = repairModel.getIdTechnician();
+        this.paymentStatus = repairModel.getPaymentStatus();
+        this.budgetList = repairModel.getBudgetList();
+    }
 }

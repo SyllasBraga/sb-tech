@@ -2,8 +2,21 @@ package com.sb.tech.repositories;
 
 import com.sb.tech.models.RepairModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
+
+import java.util.UUID;
 
 @Repository
 public interface RepairRepository extends JpaRepository<RepairModel, Long> {
+
+    @Query(value = "SELECT  * FROM `repair` rep " +
+            "INNER JOIN client c ON rep.id_client = C.id" +
+            "WHERE C.document = :document", nativeQuery = true)
+    RepairModel findByClientDocument(String document);
+
+    @Query(value = "SELECT * FROM `repair` r" +
+            "INNER JOIN technician t ON T.id = R.id_technician " +
+            "WHERE T.document = :uuid", nativeQuery = true)
+    RepairModel findByTechnicianUuid(UUID uuid);
 }
