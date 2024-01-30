@@ -1,15 +1,14 @@
 package com.sb.tech.controllers;
 
+import com.sb.tech.dtos.BudgetDto;
 import com.sb.tech.dtos.RepairDto;
+import com.sb.tech.models.BudgetModel;
 import com.sb.tech.models.RepairModel;
 import com.sb.tech.services.RepairService;
 import jakarta.validation.Valid;
 import org.hibernate.validator.constraints.br.CPF;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,5 +41,23 @@ public class RepairController {
     public ResponseEntity<RepairDto> getByTechnicianUuid(@RequestParam(name = "id") String id){
         RepairDto repairDto = RepairDto.toRepairDto(repairService.getByTechnicianId(id));
         return ResponseEntity.ok(repairDto);
+    }
+
+    @PostMapping
+    public ResponseEntity<RepairDto> insert(@RequestBody RepairDto repairDto){
+        RepairModel repairModel = repairService.insert(RepairModel.toRepairModel(repairDto));
+        return ResponseEntity.ok(RepairDto.toRepairDto(repairModel));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<RepairDto> update(@PathVariable Long id, @RequestBody RepairDto repairDto){
+        RepairModel repairModel = repairService.update(id, RepairModel.toRepairModel(repairDto));
+        return ResponseEntity.ok(RepairDto.toRepairDto(repairModel));
+    }
+
+    @PutMapping("/{id}/budget")
+    public ResponseEntity<RepairDto> addBudget(@PathVariable Long id, @RequestBody List<BudgetDto> budgetDto){
+        RepairModel repairModel = repairService.addBudget(id, BudgetModel.toBudgetModel(budgetDto));
+        return ResponseEntity.ok(RepairDto.toRepairDto(repairModel));
     }
 }

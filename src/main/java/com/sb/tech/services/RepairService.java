@@ -53,9 +53,9 @@ public class RepairService {
         repository.deleteById(id);
     }
 
-    public RepairModel addBudget(Long id, BudgetModel budgetModel){
+    public RepairModel addBudget(Long id, List<BudgetModel> budgetModel){
         RepairModel actualRepair = repository.findById(id).orElseThrow(()-> new NotFoundException(REPAIR_NOT_FOUND));
-        actualRepair.getBudgetList().add(budgetModel);
+        budgetModel.forEach(newBudgetModel -> actualRepair.getBudgetList().add(newBudgetModel));
         return repository.save(actualRepair);
     }
 }
