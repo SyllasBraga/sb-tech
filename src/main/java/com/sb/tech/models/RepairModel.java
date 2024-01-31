@@ -18,15 +18,19 @@ public class RepairModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "entry_date")
     private Timestamp entryDate;
+    @Column(name = "repair_time_stipulated")
     private Timestamp repairTimeStipulated;
+    @Column(name = "out_date")
     private Timestamp outDate;
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(name = "id_client",referencedColumnName = "id")
     private ClientModel idClient;
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(name = "id_technician",referencedColumnName = "id")
     private TechnicianModel idTechnician;
+    @Column(name = "id_payment_status")
     private String paymentStatus;
     @ManyToMany
     @JoinTable(name = "repair_budget",
