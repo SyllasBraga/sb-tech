@@ -60,4 +60,10 @@ public class RepairController {
         RepairModel repairModel = repairService.addBudget(id, BudgetModel.toBudgetModel(budgetDto));
         return ResponseEntity.ok(RepairDto.toRepairDto(repairModel));
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<RepairDto> delete(@PathVariable Long id){
+        repairService.delete(id);
+        return ResponseEntity.noContent().build();
+    }
 }
