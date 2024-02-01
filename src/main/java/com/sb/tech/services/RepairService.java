@@ -46,7 +46,8 @@ public class RepairService {
     }
 
     public void delete(Long id){
-        repository.deleteById(id);
+        RepairModel repairModel = repository.findById(id).orElseThrow(()-> new NotFoundException(REPAIR_NOT_FOUND));
+        repository.deleteById(repairModel.getId());
     }
 
     public RepairModel addBudget(Long id, List<BudgetModel> budgetModel){

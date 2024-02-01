@@ -75,4 +75,6 @@ INSERT INTO payment_status(status) VALUES('paid'), ('pendent');
 INSERT INTO hardware_type (details) VALUES ('CPU'),('RAM'),('GPU'),('HDD'),('SSD'),('Motherboard'),
 ('Power Supply'),('Monitor'),('Keyboard'),('Mouse');
 
-SELECT  * FROM `repair` rep INNER JOIN client c ON rep.id_client = c.id WHERE c.document = '40174430019';
+INSERT INTO budget VALUES(null, 345.91, "Solda BGA", 3)
+
+insert into repair_budget values(2,1)
