@@ -27,16 +27,12 @@ public class RepairService {
         return repository.findAll();
     }
 
-    public RepairModel getByClientDocument(String document){
+    public List<RepairModel> getByClientDocument(String document){
         return repository.findByClientDocument(document);
     }
 
-    public RepairModel getByTechnicianId(String uuid){
-        try {
-            return repository.findByTechnicianUuid(UUID.fromString(uuid));
-        }catch (IllegalArgumentException ex){
-            throw new UuidParseException(EXCEPTION_UUID_INVALID);
-        }
+    public List<RepairModel> getByTechnicianId(String uuid){
+        return repository.findByTechnicianUuid(uuid);
     }
 
     public RepairModel insert(RepairModel repairModel){

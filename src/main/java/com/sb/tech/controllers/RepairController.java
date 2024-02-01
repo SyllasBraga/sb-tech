@@ -32,14 +32,18 @@ public class RepairController {
     }
 
     @GetMapping("/client")
-    public ResponseEntity<RepairDto> getByClientDocument(@Valid @RequestParam(name = "document") @CPF String document){
-        RepairDto repairDto = RepairDto.toRepairDto(repairService.getByClientDocument(document));
+    public ResponseEntity<List<RepairDto>> getByClientDocument(@Valid @RequestParam(name = "document") @CPF String document){
+        List<RepairDto> repairDto = new ArrayList<>();
+        repairService.getByClientDocument(document)
+                .forEach(repairModel -> repairDto.add(RepairDto.toRepairDto(repairModel)));
         return ResponseEntity.ok(repairDto);
     }
 
     @GetMapping("/technician")
-    public ResponseEntity<RepairDto> getByTechnicianUuid(@RequestParam(name = "id") String id){
-        RepairDto repairDto = RepairDto.toRepairDto(repairService.getByTechnicianId(id));
+    public ResponseEntity<List<RepairDto>> getByTechnicianUuid(@RequestParam(name = "id") String id){
+        List<RepairDto> repairDto = new ArrayList<>();
+        repairService.getByTechnicianId(id)
+                .forEach(repairModel -> repairDto.add(RepairDto.toRepairDto(repairModel)));
         return ResponseEntity.ok(repairDto);
     }
 
