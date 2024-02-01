@@ -20,10 +20,11 @@ public class BudgetModel {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "repair_value")
     private BigDecimal repairValue;
     private String details;
     @ManyToOne
-    @JoinColumn(referencedColumnName = "id")
+    @JoinColumn(name = "id_hardware_type",referencedColumnName = "id")
     private HardwareTypeModel hardwareType;
 
     public void update(BudgetModel budgetModel) {

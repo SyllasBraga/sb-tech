@@ -3,7 +3,7 @@ CREATE DATABASE sb_tech;
 USE sb_tech;
 
 CREATE TABLE repair(
-id VARCHAR(36) PRIMARY KEY NOT NULL,
+id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
 entry_date TIMESTAMP NOT NULL,
 repair_time_stipulated TIMESTAMP NOT NULL,
 out_date TIMESTAMP,
@@ -13,13 +13,13 @@ id_payment_status VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE repair_budget(
-id_repair VARCHAR(36) NOT NULL,
-id_budget VARCHAR(36) NOT NULL
+id_repair INT NOT NULL,
+id_budget INT NOT NULL
 );
 
 CREATE TABLE budget(
-id VARCHAR(36) PRIMARY KEY NOT NULL,
-rapair_value FLOAT(10.2) NOT NULL,
+id INT PRIMARY KEY NOT NULL AUTO_INCREMENT,
+repair_value FLOAT(10.2) NOT NULL,
 details VARCHAR(1000) NOT NULL,
 id_hardware_type INT NOT NULL
 );
@@ -74,3 +74,5 @@ FOREIGN KEY (id_hardware_type) REFERENCES hardware_type(id);
 INSERT INTO payment_status(status) VALUES('paid'), ('pendent');
 INSERT INTO hardware_type (details) VALUES ('CPU'),('RAM'),('GPU'),('HDD'),('SSD'),('Motherboard'),
 ('Power Supply'),('Monitor'),('Keyboard'),('Mouse');
+
+SELECT  * FROM `repair` rep INNER JOIN client c ON rep.id_client = c.id WHERE c.document = '40174430019';

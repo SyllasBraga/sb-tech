@@ -10,13 +10,13 @@ import java.util.UUID;
 @Repository
 public interface RepairRepository extends JpaRepository<RepairModel, Long> {
 
-    @Query(value = "SELECT  * FROM `repair` rep " +
-            "INNER JOIN client c ON rep.id_client = C.id" +
-            "WHERE C.document = :document", nativeQuery = true)
+    @Query(value = "SELECT  rep.*, c.id as client_id FROM `repair` rep " +
+            "INNER JOIN client c ON rep.id_client = c.id " +
+            "WHERE c.document = :document", nativeQuery = true)
     RepairModel findByClientDocument(String document);
 
-    @Query(value = "SELECT * FROM `repair` r" +
-            "INNER JOIN technician t ON T.id = R.id_technician " +
-            "WHERE T.document = :uuid", nativeQuery = true)
+    @Query(value = "SELECT * FROM `repair` r " +
+            "INNER JOIN technician t ON t.id = r.id_technician " +
+            "WHERE t.document = :uuid", nativeQuery = true)
     RepairModel findByTechnicianUuid(UUID uuid);
 }
