@@ -16,7 +16,7 @@ import java.util.List;
 @Table(name = "repair")
 public class RepairModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "entry_date")
     private Timestamp entryDate;

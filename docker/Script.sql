@@ -6,10 +6,10 @@ CREATE TABLE repair(
 id VARCHAR(36) PRIMARY KEY NOT NULL,
 entry_date TIMESTAMP NOT NULL,
 repair_time_stipulated TIMESTAMP NOT NULL,
-outDate TIMESTAMP NOT NULL,
+out_date TIMESTAMP,
 id_client VARCHAR(36) NOT NULL,
 id_technician VARCHAR(36) NOT NULL,
-id_payment_status INT NOT NULL
+id_payment_status VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE repair_budget(
@@ -61,9 +61,6 @@ FOREIGN KEY (id_client) REFERENCES client(id);
 
 ALTER TABLE repair ADD CONSTRAINT fk_technician_repair 
 FOREIGN KEY (id_technician) REFERENCES technician(id);
-
-ALTER TABLE repair ADD CONSTRAINT fk_payment_repair 
-FOREIGN KEY (id_payment_status) REFERENCES payment_status(id);
 
 ALTER TABLE repair_budget ADD CONSTRAINT fk_repair_budget 
 FOREIGN KEY (id_repair) REFERENCES repair(id);
