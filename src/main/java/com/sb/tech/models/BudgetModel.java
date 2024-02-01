@@ -18,7 +18,7 @@ import java.util.List;
 @Table(name = "budget")
 public class BudgetModel {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(name = "repair_value")
     private BigDecimal repairValue;
@@ -39,5 +39,11 @@ public class BudgetModel {
                 budgetModel.getRepairValue(), budgetModel.getDetails(),
                 HardwareTypeModel.toHardwareTypeModel(budgetModel.getHardwareType()))));
         return listModel;
+    }
+
+    public static BudgetModel toBudgetModel(BudgetDto budgetModel) {
+        return new BudgetModel(budgetModel.getId(),
+                budgetModel.getRepairValue(), budgetModel.getDetails(),
+                HardwareTypeModel.toHardwareTypeModel(budgetModel.getHardwareType()));
     }
 }

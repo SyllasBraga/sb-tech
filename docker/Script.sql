@@ -74,7 +74,3 @@ FOREIGN KEY (id_hardware_type) REFERENCES hardware_type(id);
 INSERT INTO payment_status(status) VALUES('paid'), ('pendent');
 INSERT INTO hardware_type (details) VALUES ('CPU'),('RAM'),('GPU'),('HDD'),('SSD'),('Motherboard'),
 ('Power Supply'),('Monitor'),('Keyboard'),('Mouse');
-
-INSERT INTO budget VALUES(null, 345.91, "Solda BGA", 3)
-
-insert into repair_budget values(2,1)

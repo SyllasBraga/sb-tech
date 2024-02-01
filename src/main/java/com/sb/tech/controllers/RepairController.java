@@ -60,7 +60,7 @@ public class RepairController {
     }
 
     @PutMapping("/{id}/budget")
-    public ResponseEntity<RepairDto> addBudget(@PathVariable Long id, @RequestBody List<BudgetDto> budgetDto){
+    public ResponseEntity<RepairDto> addBudget(@PathVariable Long id, @RequestBody BudgetDto budgetDto){
         RepairModel repairModel = repairService.addBudget(id, BudgetModel.toBudgetModel(budgetDto));
         return ResponseEntity.ok(RepairDto.toRepairDto(repairModel));
     }

@@ -15,8 +15,8 @@ public class BudgetService {
         this.budgetRepository = budgetRepository;
     }
 
-    public void insert(BudgetModel budgetModel){
-        budgetRepository.save(budgetModel);
+    public BudgetModel insert(BudgetModel budgetModel){
+        return budgetRepository.save(budgetModel);
     }
 
     public void update(BudgetModel budgetModel){
