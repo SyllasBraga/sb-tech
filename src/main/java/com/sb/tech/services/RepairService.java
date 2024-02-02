@@ -1,56 +1,17 @@
 package com.sb.tech.services;
 
-import com.sb.tech.exceptions.NotFoundException;
 import com.sb.tech.models.BudgetModel;
 import com.sb.tech.models.RepairModel;
-import com.sb.tech.repositories.RepairRepository;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-public class RepairService {
+public interface RepairService {
 
-    public static final String REPAIR_NOT_FOUND = "Repair not found";
-    private final RepairRepository repository;
-    private final BudgetService budgetService;
-
-    public RepairService(RepairRepository repository, BudgetService budgetService) {
-        this.repository = repository;
-        this.budgetService = budgetService;
-    }
-
-    public List<RepairModel> getAll(){
-        return repository.findAll();
-    }
-
-    public List<RepairModel> getByClientDocument(String document){
-        return repository.findByClientDocument(document);
-    }
-
-    public List<RepairModel> getByTechnicianId(String uuid){
-        return repository.findByTechnicianUuid(uuid);
-    }
-
-    public RepairModel insert(RepairModel repairModel){
-        return repository.save(repairModel);
-    }
-
-    public RepairModel update(Long id, RepairModel repairModel){
-        RepairModel actualRepair = repository.findById(id).orElseThrow(()-> new NotFoundException(REPAIR_NOT_FOUND));
-        actualRepair.update(repairModel);
-        return repository.save(actualRepair);
-    }
-
-    public void delete(Long id){
-        RepairModel repairModel = repository.findById(id).orElseThrow(()-> new NotFoundException(REPAIR_NOT_FOUND));
-        repository.deleteById(repairModel.getId());
-    }
-
-    public RepairModel addBudget(Long id, BudgetModel budgetModel){
-        RepairModel actualRepair = repository.findById(id).orElseThrow(()-> new NotFoundException(REPAIR_NOT_FOUND));
-        BudgetModel budgetModelSaved = budgetService.insert(budgetModel);
-        actualRepair.getBudgetList().add(budgetModelSaved);
-        return repository.save(actualRepair);
-    }
+    public List<RepairModel> getAll();
+    public List<RepairModel> getByClientDocument(String document);
+    public List<RepairModel> getByTechnicianId(String uuid);
+    public RepairModel insert(RepairModel repairModel);
+    public RepairModel update(Long id, RepairModel repairModel);
+    public void delete(Long id);
+    public RepairModel addBudget(Long id, BudgetModel budgetModel);
 }
