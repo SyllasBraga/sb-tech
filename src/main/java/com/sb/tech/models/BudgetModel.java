@@ -1,7 +1,6 @@
 package com.sb.tech.models;
 
 import com.sb.tech.dtos.BudgetDto;
-import com.sb.tech.dtos.HardwareTypeDto;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

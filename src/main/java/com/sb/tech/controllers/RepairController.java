@@ -1,5 +1,6 @@
 package com.sb.tech.controllers;
 
+import com.sb.tech.api.RepairApi;
 import com.sb.tech.dtos.BudgetDto;
 import com.sb.tech.dtos.RepairDto;
 import com.sb.tech.models.BudgetModel;
@@ -15,7 +16,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api/v1/repair")
-public class RepairController {
+public class RepairController implements RepairApi {
 
     private final RepairService repairService;
 
@@ -23,7 +24,7 @@ public class RepairController {
         this.repairService = repairService;
     }
 
-    @GetMapping
+    @Override
     public ResponseEntity<List<RepairDto>> getAll(){
         List<RepairDto> listDto = new ArrayList<>();
         List<RepairModel> listModel = repairService.getAll();
@@ -31,7 +32,7 @@ public class RepairController {
         return ResponseEntity.ok(listDto);
     }
 
-    @GetMapping("/client")
+    @Override
     public ResponseEntity<List<RepairDto>> getByClientDocument(@Valid @RequestParam(name = "document") @CPF String document){
         List<RepairDto> repairDto = new ArrayList<>();
         repairService.getByClientDocument(document)
@@ -39,7 +40,7 @@ public class RepairController {
         return ResponseEntity.ok(repairDto);
     }
 
-    @GetMapping("/technician")
+    @Override
     public ResponseEntity<List<RepairDto>> getByTechnicianUuid(@RequestParam(name = "id") String id){
         List<RepairDto> repairDto = new ArrayList<>();
         repairService.getByTechnicianId(id)
@@ -47,25 +48,25 @@ public class RepairController {
         return ResponseEntity.ok(repairDto);
     }
 
-    @PostMapping
+    @Override
     public ResponseEntity<RepairDto> insert(@RequestBody RepairDto repairDto){
         RepairModel repairModel = repairService.insert(RepairModel.toRepairModel(repairDto));
         return ResponseEntity.ok(RepairDto.toRepairDto(repairModel));
     }
 
-    @PutMapping("/{id}")
+    @Override
     public ResponseEntity<RepairDto> update(@PathVariable Long id, @RequestBody RepairDto repairDto){
         RepairModel repairModel = repairService.update(id, RepairModel.toRepairModel(repairDto));
         return ResponseEntity.ok(RepairDto.toRepairDto(repairModel));
     }
 
-    @PutMapping("/{id}/budget")
+    @Override
     public ResponseEntity<RepairDto> addBudget(@PathVariable Long id, @RequestBody BudgetDto budgetDto){
         RepairModel repairModel = repairService.addBudget(id, BudgetModel.toBudgetModel(budgetDto));
         return ResponseEntity.ok(RepairDto.toRepairDto(repairModel));
     }
 
-    @DeleteMapping("/{id}")
+    @Override
     public ResponseEntity<RepairDto> delete(@PathVariable Long id){
         repairService.delete(id);
         return ResponseEntity.noContent().build();

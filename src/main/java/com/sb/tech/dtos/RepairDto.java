@@ -1,8 +1,6 @@
 package com.sb.tech.dtos;
 
-import com.sb.tech.models.ClientModel;
 import com.sb.tech.models.RepairModel;
-import com.sb.tech.models.TechnicianModel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
