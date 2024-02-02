@@ -5,6 +5,7 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+@RequestMapping("api/v1/technician")
 public interface TechnicianApi {
 
     @GetMapping("/{id}")

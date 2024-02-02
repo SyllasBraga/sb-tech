@@ -10,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("api/v1/technician")
 public class TechnicianController implements TechnicianApi {
 
     public final TechnicianService technicianService;
