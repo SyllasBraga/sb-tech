@@ -6,6 +6,7 @@ import com.sb.tech.exceptions.UuidParseException;
 import com.sb.tech.models.TechnicianModel;
 import com.sb.tech.repositories.TechnicianRepository;
 import com.sb.tech.services.impl.TechnicianServiceImpl;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -18,12 +19,15 @@ import java.util.UUID;
 
 import static java.util.Optional.ofNullable;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.when;
 
 class TechnicianServiceTest {
 
     private static final String TECH_CPF = "40671276000";
     private static final UUID TECH_UUID = UUID.randomUUID();
+    public static final String PASSWORD_LOGIN = "12345678";
+    private TechnicianModel technicianSaved;
     private TechnicianModel technicianExpected;
 
     @InjectMocks
@@ -36,7 +40,8 @@ class TechnicianServiceTest {
     @BeforeEach
     void setup(){
         MockitoAnnotations.openMocks(this);
-        startData();
+        startTechnicianExpected();
+        startTechnicianWillBeSave();
     }
 
     @Test
@@ -66,8 +71,36 @@ class TechnicianServiceTest {
         }
     }
 
-    private void startData(){
+    @Test
+    void whenGetByDocumentReturnsATechnician(){
+        when(technicianRepository.findByDocument(TECH_CPF)).thenReturn(technicianExpected);
+        TechnicianModel technicianModel = technicianService.getTechnicianByDocument(TECH_CPF);
+        assertEquals(TechnicianModel.class, technicianModel.getClass());
+    }
+
+    @Test
+    void whenInsertReturnsATechnician(){
+        when(technicianRepository.save(any())).thenReturn(technicianSaved);
+        TechnicianModel technicianModel = technicianService.insertTechnician(technicianSaved);
+        assertEquals(TechnicianModel.class, technicianModel.getClass());
+    }
+
+    @Test
+    void whenUpdateReturnsATechnician(){
+        when(technicianRepository.findById(TECH_UUID)).thenReturn(ofNullable(technicianExpected));
+        when(technicianRepository.save(any())).thenReturn(technicianExpected);
+        TechnicianModel technicianModel = technicianService.updateTechnician(TECH_UUID.toString(), technicianExpected);
+        assertEquals(TechnicianModel.class, technicianModel.getClass());
+    }
+
+    private void startTechnicianExpected(){
         technicianExpected = new TechnicianModel();
-        technicianExpected.setId(TECH_UUID);
+        technicianSaved = new TechnicianModel();
+        technicianSaved.setId(TECH_UUID);
+    }
+
+    private void startTechnicianWillBeSave(){
+        technicianSaved = new TechnicianModel();
+        technicianSaved.setPasswordLogin(PASSWORD_LOGIN);
     }
 }
