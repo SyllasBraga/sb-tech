@@ -22,9 +22,8 @@
 ## Etapas
 - ~~Criar base de dados MySQL em um container Docker;~~
 - ~~Extrair modelo ER do SGDB MySQL;~~
-- Criar as camadas de entidades, acesso ao banco de dados, serviços, controllers, testes, etc;
-- Implementar cacheamento com Redis;
-- Implementar um webhook para cada atualização nos status do reparo
-- Implementar Autenticação e Autorização com JWT;
+- ~~Criar as camadas de entidades, acesso ao banco de dados, serviços, controllers, testes, etc~~;
 - Documentar com Swagger;
+- Implementar Autenticação e Autorização com JWT;
+- Implementar cacheamento com Redis;
 - Adicionar a aplicação em um container docker e subir no dockerhub. 
