@@ -18,11 +18,15 @@ import java.time.Instant;
 @ControllerAdvice
 public class ControllerAdviceHandler {
 
+    public static final String BAD_REQUEST = "Bad Request";
+    public static final String REPAIR_NOT_FOUND = "Repair not found";
+    public static final String VALIDATION_ERROR = "Validation error";
+
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
     public ResponseEntity<StandardError> notFounException(NotFoundException e, HttpServletRequest http){
         StandardError error = new StandardError(Instant.now(), HttpStatus.NOT_FOUND.value(),
-                "Repair not found", e.getMessage(), http.getRequestURI());
+                REPAIR_NOT_FOUND, e.getMessage(), http.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
@@ -30,7 +34,7 @@ public class ControllerAdviceHandler {
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<ValidationError> validationException(MethodArgumentNotValidException e, HttpServletRequest http){
         ValidationError error = new ValidationError(Instant.now(), HttpStatus.BAD_REQUEST.value(),
-                "Validation error", e.getTitleMessageCode(), http.getRequestURI());
+                VALIDATION_ERROR, e.getTitleMessageCode(), http.getRequestURI());
         for (FieldError field : e.getFieldErrors()){
             error.addListErrors(field.getField(), field.getDefaultMessage());
         }
@@ -42,7 +46,7 @@ public class ControllerAdviceHandler {
     public ResponseEntity<StandardError> sqlIntegrityViolationException(SQLIntegrityConstraintViolationException e,
                                                                         HttpServletRequest http){
         StandardError error = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(),
-                "Bad Request", e.getMessage(), http.getRequestURI());
+                BAD_REQUEST, e.getMessage(), http.getRequestURI());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
@@ -51,7 +55,7 @@ public class ControllerAdviceHandler {
     public ResponseEntity<StandardError> httpMessageNotReadableException(HttpMessageNotReadableException e,
                                                                         HttpServletRequest http){
         StandardError error = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(),
-                "Bad Request", e.getMessage(), http.getRequestURI());
+                BAD_REQUEST, e.getMessage(), http.getRequestURI());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 
@@ -60,7 +64,7 @@ public class ControllerAdviceHandler {
     public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException e,
                                                                          HttpServletRequest http){
         StandardError error = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(),
-                "Bad Request", e.getMessage(), http.getRequestURI());
+                BAD_REQUEST, e.getMessage(), http.getRequestURI());
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
     }
 }
