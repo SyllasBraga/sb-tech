@@ -4,6 +4,7 @@ import com.sb.tech.exceptions.NotFoundException;
 import com.sb.tech.exceptions.UuidParseException;
 import com.sb.tech.models.TechnicianModel;
 import com.sb.tech.models.enums.AccountStatusEnum;
+import com.sb.tech.models.enums.Role;
 import com.sb.tech.repositories.TechnicianRepository;
 import com.sb.tech.services.TechnicianService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -40,6 +41,7 @@ public class TechnicianServiceImpl implements TechnicianService {
         technicianModel.setId(UUID.randomUUID());
         technicianModel.setPasswordLogin(passwordEncoder.encode(technicianModel.getPasswordLogin()));
         technicianModel.setAccountStatus(AccountStatusEnum.ACTIVE);
+        technicianModel.setRole(Role.TECHNICIAN);
         return technicianRepository.save(technicianModel);
     }
 

@@ -2,6 +2,7 @@ package com.sb.tech.models;
 
 import com.sb.tech.dtos.TechnicianDto;
 import com.sb.tech.models.enums.AccountStatusEnum;
+import com.sb.tech.models.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -39,6 +40,9 @@ public class TechnicianModel {
     @Column(name = "id_account_status")
     @Enumerated(EnumType.STRING)
     private AccountStatusEnum accountStatus;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role_type")
+    private Role role;
 
     public void update(TechnicianModel newTechnician) {
         this.id = newTechnician.getId();
@@ -58,6 +62,6 @@ public class TechnicianModel {
         return new TechnicianModel(technicianDto.getId(), technicianDto.getDocument(), technicianDto.getPasswordLogin(),
                 technicianDto.getName(), technicianDto.getSalary(), technicianDto.getPhone(), technicianDto.getEmail(),
                 technicianDto.getBirthDate(), technicianDto.getAdmissionDate(), technicianDto.getFiredDate(),
-                technicianDto.getAccountStatus());
+                technicianDto.getAccountStatus(), Role.TECHNICIAN);
     }
 }
