@@ -48,6 +48,7 @@ email VARCHAR(255) NOT NULL,
 birth_date TIMESTAMP NOT NULL,
 admission_date TIMESTAMP NOT NULL,
 fired_date TIMESTAMP,
+role_type VARCHAR(255) NOT NULL,
 id_account_status VARCHAR(255) NOT NULL 
 );
 
