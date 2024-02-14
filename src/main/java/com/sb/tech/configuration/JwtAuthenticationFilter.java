@@ -44,7 +44,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         technicianDocument = jwtService.extractUserName(jwt);
         if (StringUtils.isNotEmpty(technicianDocument)
                 && SecurityContextHolder.getContext().getAuthentication() == null) {
-            UserDetails userDetails = technicianService.getTechnicianByDocument(technicianDocument);
+            UserDetails userDetails = technicianService.userDetailsService().loadUserByUsername(technicianDocument);
             if (jwtService.isTokenValid(jwt, userDetails)) {
                 SecurityContext context = SecurityContextHolder.createEmptyContext();
                 UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
