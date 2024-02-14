@@ -5,6 +5,7 @@ import com.sb.tech.models.enums.AccountStatusEnum;
 import com.sb.tech.models.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.JdbcTypeCode;
@@ -24,6 +25,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @Table(name = "technician")
 @Entity
+@Builder
 public class TechnicianModel implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
