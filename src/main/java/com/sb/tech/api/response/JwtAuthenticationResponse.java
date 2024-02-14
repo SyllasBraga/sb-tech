@@ -1,4 +1,4 @@
-package com.sb.tech.api.reponse;
+package com.sb.tech.api.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

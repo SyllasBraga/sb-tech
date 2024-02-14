@@ -1,9 +1,8 @@
 package com.sb.tech.controllers;
 
-import com.sb.tech.api.reponse.JwtAuthenticationResponse;
+import com.sb.tech.api.response.JwtAuthenticationResponse;
 import com.sb.tech.api.request.SigningRequest;
 import com.sb.tech.services.AuthenticationService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;

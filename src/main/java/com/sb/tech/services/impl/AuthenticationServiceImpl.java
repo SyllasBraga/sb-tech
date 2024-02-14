@@ -1,8 +1,7 @@
 package com.sb.tech.services.impl;
 
-import com.sb.tech.api.reponse.JwtAuthenticationResponse;
+import com.sb.tech.api.response.JwtAuthenticationResponse;
 import com.sb.tech.api.request.SigningRequest;
-import com.sb.tech.repositories.TechnicianRepository;
 import com.sb.tech.services.AuthenticationService;
 import com.sb.tech.services.JwtService;
 import com.sb.tech.services.TechnicianService;
