@@ -7,6 +7,9 @@ import com.sb.tech.models.enums.AccountStatusEnum;
 import com.sb.tech.models.enums.Role;
 import com.sb.tech.repositories.TechnicianRepository;
 import com.sb.tech.services.TechnicianService;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -34,7 +37,11 @@ public class TechnicianServiceImpl implements TechnicianService {
     }
 
     public TechnicianModel getTechnicianByDocument(String document){
-        return technicianRepository.findByDocument(document);
+        TechnicianModel technicianModel = technicianRepository.findByDocument(document);
+        if(technicianModel == null){
+            throw new NotFoundException(TECHNICIAN_NOT_FOUND);
+        }
+        return technicianModel;
     }
 
     public TechnicianModel insertTechnician(TechnicianModel technicianModel){
@@ -63,5 +70,15 @@ public class TechnicianServiceImpl implements TechnicianService {
         } catch (IllegalArgumentException ex) {
             throw new UuidParseException(EXCEPTION_UUID_INVALID);
         }
+    }
+
+    @Override
+    public UserDetailsService userDetailsService() {
+        return new UserDetailsService() {
+            @Override
+            public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+                return getTechnicianByDocument(username);
+            }
+        };
     }
 }

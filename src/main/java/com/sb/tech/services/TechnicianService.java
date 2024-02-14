@@ -1,6 +1,7 @@
 package com.sb.tech.services;
 
 import com.sb.tech.models.TechnicianModel;
+import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface TechnicianService {
 
@@ -9,4 +10,5 @@ public interface TechnicianService {
     TechnicianModel insertTechnician(TechnicianModel technicianModel);
     TechnicianModel updateTechnician(String id, TechnicianModel newTechnician);
     void deleteTechnician(String uuid);
+    UserDetailsService userDetailsService();
 }
