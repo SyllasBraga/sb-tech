@@ -76,6 +76,11 @@ public class TechnicianModel implements UserDetails {
     }
 
     @Override
+    public String getPassword() {
+        return this.passwordLogin;
+    }
+
+    @Override
     public String getUsername() {
         return this.document;
     }
