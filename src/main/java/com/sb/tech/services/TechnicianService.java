@@ -4,9 +4,9 @@ import com.sb.tech.models.TechnicianModel;
 
 public interface TechnicianService {
 
-    public TechnicianModel getByUuid(String uuid);
-    public TechnicianModel getTechnicianByDocument(String document);
-    public TechnicianModel insertTechnician(TechnicianModel technicianModel);
-    public TechnicianModel updateTechnician(String id, TechnicianModel newTechnician);
-    public void deleteTechnician(String uuid);
+    TechnicianModel getByUuid(String uuid);
+    TechnicianModel getTechnicianByDocument(String document);
+    TechnicianModel insertTechnician(TechnicianModel technicianModel);
+    TechnicianModel updateTechnician(String id, TechnicianModel newTechnician);
+    void deleteTechnician(String uuid);
 }

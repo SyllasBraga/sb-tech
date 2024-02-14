@@ -13,17 +13,17 @@ import java.util.List;
 public interface RepairApi {
 
     @GetMapping
-    public ResponseEntity<List<RepairDto>> getAll();
+    ResponseEntity<List<RepairDto>> getAll();
     @GetMapping("/client")
-    public ResponseEntity<List<RepairDto>> getByClientDocument(@Valid @RequestParam(name = "document") @CPF String document);
+    ResponseEntity<List<RepairDto>> getByClientDocument(@Valid @RequestParam(name = "document") @CPF String document);
     @GetMapping("/technician")
-    public ResponseEntity<List<RepairDto>> getByTechnicianUuid(@RequestParam(name = "id") String id);
+    ResponseEntity<List<RepairDto>> getByTechnicianUuid(@RequestParam(name = "id") String id);
     @PostMapping
-    public ResponseEntity<RepairDto> insert(@RequestBody RepairDto repairDto);
+    ResponseEntity<RepairDto> insert(@RequestBody RepairDto repairDto);
     @PutMapping("/{id}")
-    public ResponseEntity<RepairDto> update(@PathVariable Long id, @RequestBody RepairDto repairDto);
+    ResponseEntity<RepairDto> update(@PathVariable Long id, @RequestBody RepairDto repairDto);
     @PutMapping("/{id}/budget")
-    public ResponseEntity<RepairDto> addBudget(@PathVariable Long id, @RequestBody BudgetDto budgetDto);
+    ResponseEntity<RepairDto> addBudget(@PathVariable Long id, @RequestBody BudgetDto budgetDto);
     @DeleteMapping("/{id}")
-    public ResponseEntity<RepairDto> delete(@PathVariable Long id);
+    ResponseEntity<RepairDto> delete(@PathVariable Long id);
 }

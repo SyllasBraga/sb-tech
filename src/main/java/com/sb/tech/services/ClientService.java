@@ -6,10 +6,10 @@ import java.util.List;
 
 public interface ClientService {
 
-    public ClientModel getByUuid(String uuid);
-    public List<ClientModel> getAll();
-    public ClientModel getClientByDocument(String document);
-    public ClientModel insertClient(ClientModel clientModel);
-    public ClientModel updateClient(String id, ClientModel clientModel);
-    public void deleteClient(String uuid);
+    ClientModel getByUuid(String uuid);
+    List<ClientModel> getAll();
+    ClientModel getClientByDocument(String document);
+    ClientModel insertClient(ClientModel clientModel);
+    ClientModel updateClient(String id, ClientModel clientModel);
+    void deleteClient(String uuid);
 }

@@ -9,13 +9,13 @@ import org.springframework.web.bind.annotation.*;
 public interface TechnicianApi {
 
     @GetMapping("/{id}")
-    public ResponseEntity<TechnicianDto> getById(@PathVariable String id);
+    ResponseEntity<TechnicianDto> getById(@PathVariable String id);
     @GetMapping("")
-    public ResponseEntity<TechnicianDto> getByDocument(@RequestParam String document);
+    ResponseEntity<TechnicianDto> getByDocument(@RequestParam String document);
     @PostMapping
-    public ResponseEntity<TechnicianDto> insert(@RequestBody @Valid TechnicianDto technicianDto);
+    ResponseEntity<TechnicianDto> insert(@RequestBody @Valid TechnicianDto technicianDto);
     @PutMapping("/{id}")
-    public ResponseEntity<TechnicianDto> update(@PathVariable String id, @Valid @RequestBody TechnicianDto technicianDto);
+    ResponseEntity<TechnicianDto> update(@PathVariable String id, @Valid @RequestBody TechnicianDto technicianDto);
     @DeleteMapping("/{id}")
-    public ResponseEntity<TechnicianDto> delete(@PathVariable String id);
+    ResponseEntity<TechnicianDto> delete(@PathVariable String id);
 }

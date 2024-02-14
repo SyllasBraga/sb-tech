@@ -7,11 +7,11 @@ import java.util.List;
 
 public interface RepairService {
 
-    public List<RepairModel> getAll();
-    public List<RepairModel> getByClientDocument(String document);
-    public List<RepairModel> getByTechnicianId(String uuid);
-    public RepairModel insert(RepairModel repairModel);
-    public RepairModel update(Long id, RepairModel repairModel);
-    public void delete(Long id);
-    public RepairModel addBudget(Long id, BudgetModel budgetModel);
+    List<RepairModel> getAll();
+    List<RepairModel> getByClientDocument(String document);
+    List<RepairModel> getByTechnicianId(String uuid);
+    RepairModel insert(RepairModel repairModel);
+    RepairModel update(Long id, RepairModel repairModel);
+    void delete(Long id);
+    RepairModel addBudget(Long id, BudgetModel budgetModel);
 }
