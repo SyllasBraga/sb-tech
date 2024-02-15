@@ -1,5 +1,6 @@
 package com.sb.tech.controllers.advice;
 
+import com.sb.tech.exceptions.JsonRuntimeException;
 import com.sb.tech.exceptions.NotFoundException;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -62,6 +63,15 @@ public class ControllerAdviceHandler {
     @ExceptionHandler(DataIntegrityViolationException.class)
     @ResponseStatus(HttpStatus.BAD_REQUEST)
     public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException e,
+                                                                         HttpServletRequest http){
+        StandardError error = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(),
+                BAD_REQUEST, e.getMessage(), http.getRequestURI());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(error);
+    }
+
+    @ExceptionHandler(JsonRuntimeException.class)
+    @ResponseStatus(HttpStatus.BAD_REQUEST)
+    public ResponseEntity<StandardError> jsonRuntimeException(JsonRuntimeException e,
                                                                          HttpServletRequest http){
         StandardError error = new StandardError(Instant.now(), HttpStatus.BAD_REQUEST.value(),
                 BAD_REQUEST, e.getMessage(), http.getRequestURI());

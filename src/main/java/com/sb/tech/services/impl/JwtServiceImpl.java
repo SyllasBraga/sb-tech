@@ -3,6 +3,7 @@ package com.sb.tech.services.impl;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.ser.std.JsonValueSerializer;
+import com.sb.tech.exceptions.JsonRuntimeException;
 import com.sb.tech.services.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
