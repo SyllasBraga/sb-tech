@@ -1,23 +1,17 @@
 package com.sb.tech.services.impl;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ser.std.JsonValueSerializer;
-import com.sb.tech.exceptions.JsonRuntimeException;
+import com.fasterxml.jackson.databind.node.ObjectNode;
+import com.sb.tech.models.TechnicianModel;
 import com.sb.tech.services.JwtService;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
-import io.swagger.v3.core.util.Json;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.boot.autoconfigure.gson.GsonBuilderCustomizer;
-import org.springframework.http.converter.HttpMessageNotReadableException;
-import org.springframework.http.converter.json.GsonFactoryBean;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import java.security.Key;
 import java.util.Date;
@@ -42,7 +36,7 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public String generateToken(UserDetails userDetails) {
+    public String generateToken(TechnicianModel userDetails) {
         return generateToken(new HashMap<>(), userDetails);
     }
 
@@ -57,16 +51,14 @@ public class JwtServiceImpl implements JwtService {
         return claimsResolvers.apply(claims);
     }
 
-    private String generateToken(Map<String, Object> extraClaims, UserDetails userDetails) {
-        try {
-            return Jwts.builder()
-                    .setClaims(extraClaims).setSubject(objectMapper.writeValueAsString(userDetails))
-                    .setIssuedAt(new Date(System.currentTimeMillis()))
-                    .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
-                    .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
-        } catch (JsonProcessingException e) {
-            throw new JsonRuntimeException(e.getMessage());
-        }
+    private String generateToken(Map<String, Object> extraClaims, TechnicianModel userDetails) {
+        return Jwts.builder()
+                .setClaims(extraClaims)
+                .claim("technician", toJsonObject(userDetails))
+                .setSubject(userDetails.getUsername())
+                .setIssuedAt(new Date(System.currentTimeMillis()))
+                .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 24))
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256).compact();
     }
 
     private boolean isTokenExpired(String token) {
@@ -85,5 +77,14 @@ public class JwtServiceImpl implements JwtService {
     private Key getSigningKey() {
         byte[] keyBytes = Decoders.BASE64.decode(jwtSigningKey);
         return Keys.hmacShaKeyFor(keyBytes);
+    }
+
+    private ObjectNode toJsonObject(TechnicianModel userDetails) {
+        ObjectNode json = objectMapper.createObjectNode();
+        json.put("id", userDetails.getId().toString());
+        json.put("name", userDetails.getName());
+        json.put("document", userDetails.getDocument());
+        json.put("email", userDetails.getEmail());
+        return json;
     }
 }

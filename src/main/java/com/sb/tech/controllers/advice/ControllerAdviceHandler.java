@@ -25,9 +25,9 @@ public class ControllerAdviceHandler {
 
     @ExceptionHandler(NotFoundException.class)
     @ResponseStatus(HttpStatus.NOT_FOUND)
-    public ResponseEntity<StandardError> notFounException(NotFoundException e, HttpServletRequest http){
+    public ResponseEntity<StandardError> notFoundException(NotFoundException e, HttpServletRequest http){
         StandardError error = new StandardError(Instant.now(), HttpStatus.NOT_FOUND.value(),
-                REPAIR_NOT_FOUND, e.getMessage(), http.getRequestURI());
+                e.getMessage(), e.getMessage(), http.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
