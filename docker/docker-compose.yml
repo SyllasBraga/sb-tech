@@ -3,9 +3,11 @@ version: '3.1'
 services:
   redis:
     image: redis
-    command: redis-server --requirepass 12345
     ports:
       - "6379:6379"
+    environment:
+      - REDIS_PASSWORD=12345
+      - REDIS_PORT=6379
   db:
     image: mysql:8.1.0
     volumes:

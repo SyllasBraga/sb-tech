@@ -1,4 +1,4 @@
-package com.sb.tech.configuration;
+package com.sb.tech.configuration.security;
 
 import com.sb.tech.services.JwtService;
 import com.sb.tech.services.TechnicianService;
